@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{common.html :: #header}">
+<body>
+<div th:replace="common.html :: #menu"></div>
+<div class="container">
+	
+	<div class="row">
+		<h2>Nouveau vol</h2>
+	</div>
+
+	<div class="row">
+		<form th:action="@{/templates/flight/add}" th:object="${flight}" method="post" class="form-horizontal" style="width: 100%">
+			<div class="form-group">
+				<label for="airplane">Choisir le model</label>
+				<div>
+					<select class="form-select" th:field="*{airplane}" id="airplane">
+						<option th:each="subject : ${airplanes}"
+								th:value="${airplane.id}"
+								th:text="${airplane.name}"/>
+					</select>
+				</div>
+				
+			</div>
+			
+			<div class="form-group">
+				<label for="city">Choisir la ville de départ</label>
+				<div>
+					<select class="form-select" th:field="*{city}" id="city">
+						<!--<option value="0" selected>Choisir l'étudiant</option>-->
+						<option th:each="city : ${citys}"
+								th:value="${city.registrationNumber}"
+								th:text="${student.firstName}+ ' ' + ${student.lastName}"/>
+					</select>
+					<!--<p class="text-danger" th:if="${#fields.hasErrors('grade.student')}" th:errors="*{grade.student}"></p>-->
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="grade">Note</label>
+				<div>
+					<input type="number" th:field="*{gradeValue}" id="gradeValue" placeholder="Note" class="col-4">
+					<p class="text-danger" th:if="${#fields.hasErrors('gradeValue')}" th:errors="*{gradeValue}"></p>	
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div>
+					<a class="btn btn-danger btn-sm" href="/grade/list">Annuler</a>
+					<input class="btn btn-primary btn-sm" type="submit" value="Enregistrer">
+				</div>
+			</div>
+
+		</form>
+	</div>
+
+</div>
+</body>
+</html>
